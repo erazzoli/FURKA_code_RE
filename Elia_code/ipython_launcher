@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source /sf/furka/applications/miniconda3/etc/profile.d/conda.sh
+#source /sf/eido/applications/miniconda3/etc/profile.d/conda.sh
+
+if [[ "$CONDA_DEFAULT_ENV" != "fdaq" ]]; then
+    conda activate fdaq
+fi
+
+#if [[ "$CONDA_DEFAULT_ENV" != "slic" ]]; then
+#    conda activate slic
+#fi
+
+cd /photonics/home/gac-furka
+export PYTHONPATH=/photonics/home/gac-furka:$PYTHONPATH
+ipython -i --no-banner tt_script_RE.py
+#ipython
+
+
+

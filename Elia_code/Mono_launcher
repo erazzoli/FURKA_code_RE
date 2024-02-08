@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd /afs/psi.ch/intranet/SF/Photonics/SW/adl
+/usr/bin/medm -x -macro "MONO=SATOP11-OSGM087,IOC=SATOP11-CPPM-MOT5536" "AthosMono.adl" &
+

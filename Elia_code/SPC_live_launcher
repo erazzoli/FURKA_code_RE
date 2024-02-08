@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source /sf/furka/applications/miniconda3/etc/profile.d/conda.sh
+#source /sf/eido/applications/miniconda3/etc/profile.d/conda.sh
+
+if [[ "$CONDA_DEFAULT_ENV" != "fdaq" ]]; then
+    conda activate fdaq
+fi
+
+#if [[ "$CONDA_DEFAULT_ENV" != "slic" ]]; then
+#    conda activate slic
+#fi
+
+cd /photonics/home/gac-furka/Elia_code
+export PYTHONPATH=/photonics/home/gac-furka/Elia_code:$PYTHONPATH
+ipython -i --no-banner SPC_Cmos.py
+#ipython
+
+
+

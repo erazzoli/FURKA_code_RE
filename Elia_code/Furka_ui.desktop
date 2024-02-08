@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Furka_ui
+TryExec=gnome-terminal
+Exec=caqtdm /photonics/home/gac-furka/Documents/Furka.ui
+Type=Application
+Icon=/photonics/home/gac-furka/Pictures/FurkaLogo.png
+Name[en_US]=Furka_ui
