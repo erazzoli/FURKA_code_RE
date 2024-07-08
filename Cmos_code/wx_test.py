@@ -34,6 +34,6 @@ class MyFrame(wx.Frame):
         ax = self.figure.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
         ax.stock_img()
 
-#app = MyApp(0)
-#app.MainLoop()
+app = MyApp(0)
+app.MainLoop()
 
