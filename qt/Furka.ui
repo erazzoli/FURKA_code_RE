@@ -3566,7 +3566,7 @@
         <string>gnome-terminal</string>
        </property>
        <property name="args">
-        <string>-- /photonics/home/gac-furka/git/Elia_Code_git/FURKA_code_RE/Elia_code/SPC_live_launcher</string>
+        <string>-- /photonics/home/gac-furka/git/Elia_Code_git/FURKA_code_RE/Cmos_code/SPC_live_launcher</string>
        </property>
       </widget>
      </item>
@@ -4261,7 +4261,7 @@
         <string>gnome-terminal</string>
        </property>
        <property name="args">
-        <string>-- /photonics/home/gac-furka/Elia_code/time_tool_launcher</string>
+        <string>-- /photonics/home/gac-furka/git/Elia_Code_git/FURKA_code_RE/tt_code/time_tool_launcher</string>
        </property>
       </widget>
      </item>
