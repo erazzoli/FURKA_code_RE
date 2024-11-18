@@ -11,10 +11,10 @@ fi
 #    conda activate slic
 #fi
 
-cd /photonics/home/gac-furka
-export PYTHONPATH=/photonics/home/gac-furka:$PYTHONPATH
-ipython -i --no-banner tt_script_RE.py
-#ipython
+cd /photonics/home/gac-furka/git/Elia_Code_git/
+export PYTHONPATH=/photonics/home/gac-furka/Elia_Code_git/:$PYTHONPATH
+#ipython -i --no-banner tt_script_RE.py
+ipython
 
 
 

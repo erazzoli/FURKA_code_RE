@@ -2,6 +2,7 @@
 import wx
 from bsread import source
 from collections import deque
+#import cartopy
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.animation import FuncAnimation
