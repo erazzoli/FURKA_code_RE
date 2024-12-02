@@ -16,7 +16,6 @@ export PYTHONPATH=/photonics/home/gac-furka/git/bstrd/:$PYTHONPATH
 export PYTHONPATH=/photonics/home/gac-furka/git/slic/:$PYTHONPATH
 #ipython -i --no-banner tt_script_RE.py
 ipython
-#python ./spc.py
-#stty sane
+
 
 
