@@ -66,9 +66,7 @@ gauss_fit = "True", fit_start_pix= 680, fit_end_pix=760,  pix_to_Energy = 1000/2
           self.accumulator.start()
 
     def run_continuously(self):
-        with source(channels=['SATES30-RIXS-CAM01:EVENT_I_INTERP',
-'SATES30-RIXS-CAM01:EVENT_J_INTERP','SATES30-RIXS-CAM01:EVENT_NUM','SATOP11-PSAS079:SPECTRUM_X',
-'SATOP11-PSAS079:SPECTRUM_Y']) as s:
+        with source(channels=['SATES30-RIXS-CAM01:EVENT_I_INTERP', 'SATES30-RIXS-CAM01:EVENT_J_INTERP','SATES30-RIXS-CAM01:EVENT_NUM','SATOP11-PSAS079:SPECTRUM_X', 'SATOP11-PSAS079:SPECTRUM_Y']) as s:
             while True:
                 m = s.receive()
                 pid = m.data.pulse_id
@@ -124,15 +122,19 @@ gauss_fit = "True", fit_start_pix= 680, fit_end_pix=760,  pix_to_Energy = 1000/2
                 self.spc_1d_tot.append(spc_1d)
                 self.x_pxl.append(x_pxl)
                
-                #shift SASE PIDS
+                #shift SASE and RIXS PIDS
                 sase_pids = np.array(self.pids_SASE) 
-                sase_pids+=1                
+                sase_pids+=1        
+                rixs_pids = np.array(self.pids_SASE)
+                rixs_pids+=0
+                #print(sase_pids)
+                #print(rixs_pids) 
 
                 #manual drop missing with delta
-                _pids, ind_SASE, ind_RIXS = np.intersect1d(sase_pids, self.pids_RIXS, return_indices=True)
-                
-                print(ind_SASE)
-                print(ind_RIXS)  
+                _pids, ind_SASE, ind_RIXS = np.intersect1d(sase_pids, rixs_pids, return_indices=True)
+                print(ind_RIXS)
+                #print(ind_SASE)
+                #print(ind_RIXS)  
                 
                 #cross correlation here
                 RIXS = np.transpose(self.spc_1d_tot)
@@ -148,12 +150,13 @@ gauss_fit = "True", fit_start_pix= 680, fit_end_pix=760,  pix_to_Energy = 1000/2
                 self.cc_line_x.append(np.linspace(0,1999, 2000)) 
                 self.cc_line_y.append(self.cc[0][1500,0:2000])                
 
-                p0=[0,100,self.cc_line_x[0][self.cc_line_y[0].argmax()], 5]
-                fit, covariance = curve_fit(gauss, self.cc_line_x[0], self.cc_line_y[0], p0=p0)
-                self.pfit.append(pfit)
-                self.Eres.append(round( self.pfit[0][3]*2.35, 3))
-                self.fit_y.append(gauss(self.cc_line_x[0], *pfit))
-                self.fit_x.append(self.cc_line_x[0]) 
+                p0=[0,1,self.cc_line_x[0][self.cc_line_y[0].argmax()], 10]
+                
+                #fit, covariance = curve_fit(gauss, self.cc_line_x[0], self.cc_line_y[0], p0=p0)
+                #self.pfit.append(pfit)
+                #self.Eres.append(round( self.pfit[0][3]*2.35, 3))
+                #self.fit_y.append(gauss(self.cc_line_x[0], *pfit))
+                #self.fit_x.append(self.cc_line_x[0]) 
  
                 if self.gauss_fit=="True":                
                    
@@ -185,7 +188,7 @@ gauss_fit = "True", fit_start_pix= 680, fit_end_pix=760,  pix_to_Energy = 1000/2
         self.ax2_plot     = self.axs[0].plot( np.asarray(self.x_pxl)[0], np.asarray(self.spc_1d)[0],  '-o', markersize=.5)[0]
         self.ax3_plot     = self.axs[2].plot( self.sase_x[0],self.sase_spec_tot[0])[0]
         self.ax4_plot     = self.axs[3].plot( self.cc_line_x[0], self.cc_line_y[0] )[0]
-        self.ax4_plot     = self.axs[0].plot( np.asarray(self.fit_x)[0],np.asarray(self.fit_y)[0],  '-o', markersize=1 )[0]
+        #self.ax4_plot     = self.axs[0].plot( np.asarray(self.fit_x)[0],np.asarray(self.fit_y)[0],  '-o', markersize=1 )[0]
 
         #self.ax3_plot     = self.axs[2].plot(np.asarray(self.event_num_tot), '-o')[0]
         if self.gauss_fit=="True":    
@@ -223,8 +226,8 @@ gauss_fit = "True", fit_start_pix= 680, fit_end_pix=760,  pix_to_Energy = 1000/2
         #x = np.linspace(0,189,190)
         self.ax3_plot.set_data(self.sase_x[0], self.sase_spec_tot[0])
         self.ax4_plot.set_data(self.cc_line_x[0], self.cc_line_y[0])
-        self.ax4_plot_fit.set_data( np.asarray(self.fit_x)[0], np.asarray( self.fit_y)[0])
-        self.ax4_text.set_text( "E res: " + str(self.Eres[0]) + " meV, Ec[px]:" + str(round(self.pfit[0][2],1)))
+        #self.ax4_plot_fit.set_data( np.asarray(self.fit_x)[0], np.asarray( self.fit_y)[0])
+        #self.ax4_text.set_text( "E res: " + str(self.Eres[0]) + " meV, Ec[px]:" + str(round(self.pfit[0][2],1)))
 
 
         #self.ax3_plot.set_ydata(np.asarray(self.event_num_tot))
@@ -251,7 +254,7 @@ gauss_fit = "True", fit_start_pix= 680, fit_end_pix=760,  pix_to_Energy = 1000/2
             plt.show()
 
 
-SPC_run = SPC_Image(frames_num = 200, gauss_fit="False", fit_start_pix= 750, fit_end_pix=870)
+SPC_run = SPC_Image(frames_num =5, gauss_fit="False", fit_start_pix= 750, fit_end_pix=870)
 
 sleep(5)
 
