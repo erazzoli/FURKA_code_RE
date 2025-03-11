@@ -11,11 +11,10 @@ fi
 #    conda activate slic
 #fi
 
-cd /photonics/home/gac-furka/git/Elia_Code_git/FURKA_code_RE/Cmos_code/
-export PYTHONPATH=/photonics/home/gac-furka/git/bstrd/:$PYTHONPATH
-export PYTHONPATH=/photonics/home/gac-furka/git/slic/:$PYTHONPATH
-#ipython -i --no-banner tt_script_RE.py
-ipython
+cd /photonics/home/gac-furka/git/Elia_Code_git/FURKA_code_RE/Cmos_code
+export PYTHONPATH=/photonics/home/gac-furka/git/Elia_Code_git/FURKA_code_RE/Cmos_code:$PYTHONPATH
+ipython -i --no-banner SPC_Cmos_Pink.py
+#ipython
 
 
 

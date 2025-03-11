@@ -1,0 +1,2 @@
+cd /sf/xoptics/adl;
+/sf/xoptics/bin/medm/RH8/medm -x /sf/xoptics/adl/Athos.adl

@@ -19,7 +19,7 @@ from bstrd import BS, bsstream
 #from bsread import source
 
 # config
-frames_num   =50
+frames_num   =100
 
 # channel
 ph_num_name = 'SATES30-RIXS-CAM01:EVENT_NUM'
@@ -32,6 +32,11 @@ ph_num_ch = BS(ph_num_name)
 I_int_ch  = BS(I_int_name)
 J_int_ch  = BS(J_int_name)
 
+Y_min  = epics.PV('SATES30-RIXS-CAM01:cam1:MinY_RBV')
+Y_size = epics.PV('SATES30-RIXS-CAM01:cam1:SizeY_RBV')
+
+X_min  = epics.PV('SATES30-RIXS-CAM01:cam1:MinX_RBV')
+X_size = epics.PV('SATES30-RIXS-CAM01:cam1:SizeX_RBV')
 
 iso_format = "%H:%M:%S"
 
@@ -42,7 +47,7 @@ class MainPanel(wx.Panel):
 
         self.slope = 2.33581e-03
         self.c2 = 2.381609e-6
-        self.pb=1
+        self.pb=3
         self.ROI = [[0,1800],[0,1800]]
 
 
@@ -59,9 +64,9 @@ class MainPanel(wx.Panel):
 
 
 
-        self.plot_int     = plot_int = PlotPanel(self, figsize=(3,1))
-        self.plot_spectra = plot_spectra = PlotPanel(self, figsize=(3,1))
-        self.plot_image   = plot_image = PlotPanel(self, figsize=(3,1))
+        self.plot_int     = plot_int = PlotPanel(self, figsize=(3,2))
+        self.plot_spectra = plot_spectra = PlotPanel(self, figsize=(3,2))
+        self.plot_image   = plot_image = PlotPanel(self, figsize=(3,2))
 
         plots1 = (plot_int, )
         plots2 = (plot_spectra, )
@@ -78,7 +83,7 @@ class MainPanel(wx.Panel):
 
        
         widgets = (hb_plot1,hb_plot2, hb_plot3, )
-        box = make_filled_vbox(widgets, border=1)
+        box = make_filled_hbox(widgets, border=1)
         self.SetSizerAndFit(box)
 
         #btn_clearQ.Bind(wx.EVT_BUTTON, self.on_click_clearQ)
@@ -133,18 +138,18 @@ class MainPanel(wx.Panel):
 
 
         self.plot_int.clear()
-        self.plot_int.set_xlabel('shots')
+        self.plot_int.set_xlabel('RIXS images')
         self.plot_int.set_ylabel('photon num')
 
         self.plot_int.plot(np.arange(0, len(self.phs)), self.phs, '-', color='purple')
         
         self.plot_spectra.clear()
-        self.plot_spectra.plot(np.asarray(self.x_pxl)[0], np.asarray(self.spc_1d)[0], '-o'  )
+        self.plot_spectra.plot(np.asarray(self.x_pxl)[0], np.asarray(self.spc_1d)[0], '-o', markersize=.5  )
         
         self.plot_image.clear()
         self.plot_image.plot( np.concatenate(np.asarray(self.row_curv_corr_i_tot)).ravel(), np.concatenate(np.asarray(self.col_i_tot)).ravel(),  'o', markersize=.5 ) 
-
-
+        self.plot_image.set_xlim(0, Y_size.get())
+        self.plot_image.set_ylim(0, X_size.get())
         self.plot_int.draw() 
         self.plot_spectra.draw()
         self.plot_image.draw()  
