@@ -130,8 +130,8 @@ gauss_fit = "True", fit_start_pix= 680, fit_end_pix=760,  pix_to_Energy = 1000/2
 
         #self.axs[0].set_xlim([0, 1800])
         #self.axs[0].set_ylim([0, 200])
-        #self.axs[1].set_xlim([0, 1800])
-        #self.axs[1].set_ylim([0, 1800])
+        self.axs[1].set_xlim([0, 1800])
+        self.axs[1].set_ylim([0, 1800])
         #self.axs[1].set_ylim([0, 200])
         
 

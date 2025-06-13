@@ -1,0 +1,2 @@
+cd /sf/xoptics/adl;
+/sf/xoptics/bin/medm/RH8/medm -x -macro "MONO=SATOP11-OSGM087,IOC+SATOP11-CPPM-MOT5536" /sf/xoptics/adl/AthosMono.adl

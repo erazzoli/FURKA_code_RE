@@ -154,13 +154,13 @@
      <bool>false</bool>
     </property>
     <property name="channelData" stdset="0">
-     <string notr="true">SATES30-CAMS182-GIGE3:FPICTURE</string>
+     <string notr="true">SATES30-CAMS182-GIGE2:FPICTURE</string>
     </property>
     <property name="channelWidth" stdset="0">
-     <string notr="true">SATES30-CAMS182-GIGE3:WIDTH</string>
+     <string notr="true">SATES30-CAMS182-GIGE2:WIDTH</string>
     </property>
     <property name="channelHeight" stdset="0">
-     <string notr="true">SATES30-CAMS182-GIGE3:HEIGHT</string>
+     <string notr="true">SATES30-CAMS182-GIGE2:HEIGHT</string>
     </property>
     <property name="Zoom" stdset="0">
      <enum>caCamera::Yes</enum>
@@ -203,13 +203,13 @@
      <bool>false</bool>
     </property>
     <property name="channelData" stdset="0">
-     <string notr="true">SATES30-CAMS182-GIGE2:FPICTURE</string>
+     <string notr="true">SATES30-CAMS182-GIGE3:FPICTURE</string>
     </property>
     <property name="channelWidth" stdset="0">
-     <string notr="true">SATES30-CAMS182-GIGE2:WIDTH</string>
+     <string notr="true">SATES30-CAMS182-GIGE3:WIDTH</string>
     </property>
     <property name="channelHeight" stdset="0">
-     <string notr="true">SATES30-CAMS182-GIGE2:HEIGHT</string>
+     <string notr="true">SATES30-CAMS182-GIGE3:HEIGHT</string>
     </property>
     <property name="Zoom" stdset="0">
      <enum>caCamera::Yes</enum>
@@ -361,7 +361,7 @@
      <x>0</x>
      <y>0</y>
      <width>1213</width>
-     <height>28</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
